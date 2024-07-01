@@ -5,7 +5,7 @@ import useTodoStore from './store/useTodoStore';
 import {activeEnter} from './util.ts';
 
 function App() {
-  const { todoList, addTodoItem, updateTodoItem } = useTodoStore();
+  const { todoList, addTodoItem, updateTodoItem, deleteTodoItem } = useTodoStore();
 
   // state
   const [todoTitle, setTodoTitle] = useState('');
@@ -20,7 +20,11 @@ function App() {
 
   const handleOnClickComplete = (id: number, complete: boolean) => {
     updateTodoItem(id, complete);
-  }
+  };
+
+  const handleOnClickDelete = (id: number) => {
+    deleteTodoItem(id);
+  };
 
   return (
     <MainBox>
@@ -41,12 +45,12 @@ function App() {
               <label className={`${item.complete ? 'completed' : ''}`}>
                 <input
                   type="checkbox"
-                  checked={item.complete}
+                  defaultChecked={item.complete}
                   onClick={() => handleOnClickComplete(item.id, !item.complete)}
                 />
                 <p>{item.title}</p>
               </label>
-              <button>x</button>
+              <button onClick={() => handleOnClickDelete(item.id)}>x</button>
             </li>
           ))}
         </ul>

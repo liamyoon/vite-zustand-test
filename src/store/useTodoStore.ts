@@ -14,7 +14,11 @@ type TodoStore = {
 };
 
 const useTodoStore = create<TodoStore>((set) => ({
-  todoList: [],
+  todoList: [
+    { title: 'todo1', id: 1, complete: true },
+    { title: 'todo2', id: 2, complete: true },
+    { title: 'todo3', id: 3, complete: false },
+  ],
   addTodoItem: (title) => set((state) => {
     const newId = (state.todoList[state.todoList.length - 1]?.id || 0) + 1;
     return {
